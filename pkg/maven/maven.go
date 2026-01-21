@@ -94,7 +94,7 @@ func Execute(options *ExecuteOptions, utils Utils) (string, error) {
 	if stdOutBuf == nil {
 		return "", nil
 	}
-	return string(stdOutBuf.Bytes()), nil
+	return stdOutBuf.String(), nil
 }
 
 // Evaluate constructs ExecuteOptions for using the maven-help-plugin's 'evaluate' goal to

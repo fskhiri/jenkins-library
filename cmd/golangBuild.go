@@ -122,7 +122,7 @@ func golangBuild(config golangBuildOptions, telemetryData *telemetry.CustomData,
 	}
 }
 
-func runGolangBuild(config *golangBuildOptions, telemetryData *telemetry.CustomData, utils golangBuildUtils, commonPipelineEnvironment *golangBuildCommonPipelineEnvironment) error {
+func runGolangBuild(config *golangBuildOptions, _ *telemetry.CustomData, utils golangBuildUtils, commonPipelineEnvironment *golangBuildCommonPipelineEnvironment) error {
 	goModFile, err := readGoModFile(utils) // returns nil if go.mod doesnt exist
 	if err != nil {
 		return err
@@ -320,7 +320,7 @@ func runGolangBuild(config *golangBuildOptions, telemetryData *telemetry.CustomD
 	return nil
 }
 
-func prepareGolangEnvironment(config *golangBuildOptions, goModFile *modfile.File, utils golangBuildUtils) error {
+func prepareGolangEnvironment(config *golangBuildOptions, _ *modfile.File, utils golangBuildUtils) error {
 	// configure truststore
 	err := certutils.CertificateUpdate(config.CustomTLSCertificateLinks, utils, utils, "/etc/ssl/certs/ca-certificates.crt") // TODO reimplement
 
@@ -363,7 +363,7 @@ func runGolangTests(config *golangBuildOptions, utils golangBuildUtils) (bool, e
 	return true, nil
 }
 
-func runGolangIntegrationTests(config *golangBuildOptions, utils golangBuildUtils) (bool, error) {
+func runGolangIntegrationTests(_ *golangBuildOptions, utils golangBuildUtils) (bool, error) {
 	// execute gotestsum in order to have more output options
 	// for integration tests coverage data is not meaningful and thus not being created
 	if err := utils.RunExecutable("gotestsum", "--junitfile", golangIntegrationTestOutput, "--jsonfile", integrationJsonReport, "--", "-tags=integration", "./..."); err != nil {
@@ -456,7 +456,7 @@ func runGolangciLint(utils golangBuildUtils, golangciLintDir string, failOnError
 	return nil
 }
 
-func prepareLdflags(config *golangBuildOptions, utils golangBuildUtils, envRootPath string) (*bytes.Buffer, error) {
+func prepareLdflags(config *golangBuildOptions, _ golangBuildUtils, envRootPath string) (*bytes.Buffer, error) {
 	cpe := piperenv.CPEMap{}
 	err := cpe.LoadFromDisk(path.Join(envRootPath, "commonPipelineEnvironment"))
 	if err != nil {

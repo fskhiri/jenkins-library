@@ -15,7 +15,7 @@ func mavenExecuteStaticCodeChecks(config mavenExecuteStaticCodeChecksOptions, te
 	}
 }
 
-func runMavenStaticCodeChecks(config *mavenExecuteStaticCodeChecksOptions, telemetryData *telemetry.CustomData, utils maven.Utils) error {
+func runMavenStaticCodeChecks(config *mavenExecuteStaticCodeChecksOptions, _ *telemetry.CustomData, utils maven.Utils) error {
 	var defines []string
 	var goals []string
 

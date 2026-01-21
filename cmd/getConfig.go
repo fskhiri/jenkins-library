@@ -172,6 +172,9 @@ func getConfigWithFlagValues(cmd *cobra.Command) (config.StepConfig, error) {
 		stepConfig.Config["hooks"] = stepConfig.HookConfig
 	} else {
 		log.Entry().Infof("Printing stepName %s", configOptions.StepName)
+		log.Entry().Infof("Printing StepMetadata %s", configOptions.StepMetadata)
+		log.Entry().Infof("Printing ContextConfig %s", configOptions.ContextConfig)
+		log.Entry().Infof("Printing ParametersJSON %s", configOptions.ParametersJSON)
 		if GeneralConfig.MetaDataResolver == nil {
 			GeneralConfig.MetaDataResolver = GetAllStepMetadata
 		}

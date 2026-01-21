@@ -292,7 +292,7 @@ func createOrUpdateProjectSettingsXML(projectSettingsFile string, altDeploymentR
 	}
 }
 
-func loadRemoteRepoCertificates(certificateList []string, client piperhttp.Downloader, flags *[]string, runner command.ExecRunner, fileUtils piperutils.FileUtils, javaCaCertFilePath string) error {
+func loadRemoteRepoCertificates(certificateList []string, client piperhttp.Downloader, _ *[]string, runner command.ExecRunner, fileUtils piperutils.FileUtils, javaCaCertFilePath string) error {
 	// TODO: make use of java/keytool package
 	existingJavaCaCerts := filepath.Join(os.Getenv("JAVA_HOME"), "jre", "lib", "security", "cacerts")
 
